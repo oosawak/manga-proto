@@ -1,0 +1,257 @@
+{
+ "blocks": [
+  {
+   "bg": "#ffffff",
+   "h": 92,
+   "narr": [
+    {
+     "size": 8,
+     "style": "plain",
+     "text": "ふゆの ひるまえ。",
+     "x": 60,
+     "y": 50
+    }
+   ],
+   "type": "space"
+  },
+  {
+   "display": {
+    "h": 150,
+    "pos": "50% 15%"
+   },
+   "fade_out": "white",
+   "img": "img/ep01-panel1-v1.webp",
+   "narr": [
+    {
+     "size": 5,
+     "style": "plain",
+     "text": "まちは きょうも ゆきの なか",
+     "x": 68,
+     "y": 28
+    }
+   ],
+   "type": "panel"
+  },
+  {
+   "display": {
+    "h": 140,
+    "pos": "50% 25%"
+   },
+   "frame": "b",
+   "img": "img/ep01-panel2-v1.webp",
+   "lines": [
+    {
+     "h": 58,
+     "kind": "speech",
+     "size": 4.2,
+     "tail": 65,
+     "tail_dir": "down",
+     "text": "おつかいに いってきます",
+     "w": 21,
+     "x": 22,
+     "y": 32
+    }
+   ],
+   "type": "panel"
+  },
+  {
+   "display": {
+    "h": 150,
+    "pos": "50% 30%"
+   },
+   "img": "img/ep01-panel3-v1.webp",
+   "lines": [
+    {
+     "h": 32,
+     "kind": "thought",
+     "size": 4.2,
+     "tail": 45,
+     "tail_dir": "down",
+     "text": "ゆきは かさなるけど",
+     "w": 36,
+     "x": 66,
+     "y": 18
+    },
+    {
+     "kind": "sfx",
+     "rotate": -8,
+     "size": 5,
+     "text": "さくっ",
+     "x": 20,
+     "y": 82
+    }
+   ],
+   "type": "panel"
+  },
+  {
+   "img": "img/ep02-panel5-sparrows-cold.webp",
+   "lines": [
+    {
+     "h": 44,
+     "kind": "speech",
+     "size": 3.8,
+     "tail": 45,
+     "tail_dir": "right",
+     "text": "さむい… さむい…",
+     "w": 18,
+     "x": 20,
+     "y": 40
+    }
+   ],
+   "type": "panel"
+  },
+  {
+   "bg": "#ffffff",
+   "h": 56,
+   "narr": [
+    {
+     "text": "ちいさな",
+     "style": "plain",
+     "size": 5.5,
+     "x": 57,
+     "y": 50
+    },
+    {
+     "text": "こえが しました",
+     "style": "plain",
+     "size": 5.5,
+     "x": 43,
+     "y": 50
+    }
+   ],
+   "type": "space"
+  },
+  {
+   "img": "img/ep02-panel6-sparrows-in-fur.webp",
+   "lines": [
+    {
+     "h": 54,
+     "kind": "speech",
+     "size": 4.2,
+     "tail": 60,
+     "tail_dir": "down",
+     "text": "どうぞ。あたたかいです",
+     "w": 20,
+     "x": 17,
+     "y": 22
+    },
+    {
+     "kind": "sfx",
+     "rotate": -10,
+     "size": 6.5,
+     "text": "もふっ",
+     "x": 84,
+     "y": 10
+    }
+   ],
+   "type": "panel",
+   "display": {
+    "h": 175,
+    "pos": "50% 30%"
+   }
+  },
+  {
+   "type": "space",
+   "bg": "#ffffff",
+   "h": 48,
+   "narr": [
+    {
+     "text": "ぱんやさんに",
+     "style": "plain",
+     "size": 5.5,
+     "x": 57,
+     "y": 50
+    },
+    {
+     "text": "つきました",
+     "style": "plain",
+     "size": 5.5,
+     "x": 43,
+     "y": 50
+    }
+   ]
+  },
+  {
+   "fade_out": "white",
+   "img": "img/ep02-panel7-bakery-arrival.webp",
+   "type": "panel"
+  },
+  {
+   "img": "img/ep02-panel8-bakery-inside.webp",
+   "lines": [
+    {
+     "h": 48,
+     "kind": "speech",
+     "size": 4.2,
+     "tail": 55,
+     "tail_dir": "down",
+     "text": "やきたてを ひとつ",
+     "w": 19,
+     "x": 78,
+     "y": 26
+    }
+   ],
+   "type": "panel"
+  },
+  {
+   "bg": "#ffffff",
+   "h": 56,
+   "narr": [
+    {
+     "text": "かえりみち。",
+     "style": "plain",
+     "size": 5.5,
+     "x": 57,
+     "y": 50
+    },
+    {
+     "text": "すずめは そらへ",
+     "style": "plain",
+     "size": 5.5,
+     "x": 43,
+     "y": 50
+    }
+   ],
+   "type": "space"
+  },
+  {
+   "display": {
+    "h": 150,
+    "pos": "50% 45%"
+   },
+   "fade_in": "white",
+   "img": "img/ep01-panel4-v1.webp",
+   "lines": [
+    {
+     "h": 68,
+     "kind": "speech",
+     "size": 4,
+     "tail": 35,
+     "tail_dir": "down",
+     "text": "あたたかさも かさなります",
+     "w": 20,
+     "x": 80,
+     "y": 28
+    }
+   ],
+   "type": "panel"
+  },
+  {
+   "bg": "#000000",
+   "h": 32,
+   "narr": [
+    {
+     "color": "#d9e6ef",
+     "size": 4.5,
+     "style": "on-dark",
+     "text": "おわり",
+     "x": 50,
+     "y": 50
+    }
+   ],
+   "type": "space"
+  }
+ ],
+ "series": "ふゆげミューズ",
+ "title": "第2話「かさなる もの」"
+}

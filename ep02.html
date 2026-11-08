@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ふゆげミューズ 第2話「かさなる もの」（v5試作）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800&family=Shippori+Mincho:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing:border-box; }
+  body { margin:0; background:#fff; color:#1c2733; font-family:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif; }
+  header { max-width:640px; margin:0 auto; padding:20px 16px 14px; }
+  h1 { font-size:20px; margin:0; font-weight:800; }
+  .sub { color:#7b8a99; font-size:13px; margin-top:4px; }
+  /* v5: main をコンテナにして、サイズ指定を cqw（コマ幅の1%）で統一する。
+     px指定だとスマホ幅とPC幅で文字と絵の比率がずれる問題への対処。 */
+  main { max-width:640px; margin:0 auto; container-type:inline-size; }
+
+  /* ---- ブロック共通 ---- */
+  .blk { position:relative; line-height:0; overflow:hidden; }
+  .blk img.bg { width:100%; height:100%; display:block; object-fit:cover; }
+  .blk.natural img.bg { height:auto; object-fit:initial; }
+  .frame-b { border-bottom:4px solid #14181d; }
+  .frame-t { border-top:4px solid #14181d; }
+  .frame-full { border:4px solid #14181d; }
+  .fade { position:absolute; left:0; right:0; height:22%; pointer-events:none; z-index:3; }
+  .fade.bottom { bottom:0; }
+  .fade.top { top:0; }
+  .fade.to-white.bottom { background:linear-gradient(to bottom, rgba(255,255,255,0), #fff); }
+  .fade.to-white.top { background:linear-gradient(to top, rgba(255,255,255,0), #fff); }
+  .fade.to-black.bottom { background:linear-gradient(to bottom, rgba(0,0,0,0), #000); }
+  .fade.to-black.top { background:linear-gradient(to top, rgba(0,0,0,0), #000); }
+
+  /* ---- 地の文（narration）: 位置は中心基準 x/y %、サイズは cqw ---- */
+  .narr { position:absolute; transform:translate(-50%,-50%); z-index:5;
+    writing-mode:vertical-rl; font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+    font-weight:800; letter-spacing:.12em; line-height:1.85; white-space:nowrap; }
+  .narr.plain { color:#20506e; text-shadow:0 0 6px #fff,0 0 6px #fff,0 0 3px #fff,0 0 2px #fff; }
+  .narr.on-dark { color:#7a4b21; -webkit-text-stroke:.09em #fff; paint-order:stroke fill;
+    text-shadow:0 0 5px rgba(120,180,255,.8),0 0 2px #fff; }
+  .narr.title { color:#7a4b21; text-shadow:0 0 6px #fff,0 0 4px #fff; }
+  .narr.title::before { content:""; position:absolute; left:50%; top:-14cqw; width:.7cqw; height:11cqw;
+    background:#7a4b21; transform:translateX(-50%); }
+  .narr.burst { color:#7a4b21; text-shadow:0 0 4px #fff; z-index:6; }
+  .burst-bg { position:absolute; transform:translate(-50%,-50%); z-index:4; border-radius:50%;
+    background:
+      radial-gradient(circle, #fff 0 56%, rgba(255,255,255,0) 60%),
+      repeating-conic-gradient(from 0deg, #fff 0deg 4deg, rgba(255,255,255,0) 4deg 12deg);
+    -webkit-mask-image:radial-gradient(circle, #000 0 58%, rgba(0,0,0,.55) 74%, transparent 88%);
+    mask-image:radial-gradient(circle, #000 0 58%, rgba(0,0,0,.55) 74%, transparent 88%);
+  }
+
+  /* ---- 吹き出し: 中心基準、幅は cqw 指定、しっぽは方向指定 ---- */
+  .bubble { position:absolute; transform:translate(-50%,-50%); z-index:6; line-height:1.55;
+    writing-mode:vertical-rl; display:flex; align-items:center; justify-content:center;
+    font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif; font-weight:800;
+    color:#1d4e6b; text-shadow:0 0 3px #fff,0 0 3px #fff; }
+  .bubble.speech { background:rgba(255,255,255,.88); border:2px solid #26313d; border-radius:50%;
+    padding:3.2cqw 2cqw; }
+  .bubble.speech::after { content:""; position:absolute; width:2.6cqw; height:2.6cqw;
+    background:rgba(255,255,255,.88); border-right:2px solid #26313d; border-bottom:2px solid #26313d; }
+  .bubble.speech.tail-down::after { bottom:-1.5cqw; left:var(--tail,50%); margin-left:-1.5cqw; transform:rotate(45deg) skew(14deg,14deg); }
+  .bubble.speech.tail-up::after { top:-1.5cqw; left:var(--tail,50%); margin-left:-1.5cqw; transform:rotate(225deg) skew(14deg,14deg); }
+  .bubble.speech.tail-right::after { right:-1.5cqw; top:var(--tail,50%); margin-top:-1.5cqw; transform:rotate(-45deg) skew(14deg,14deg); }
+  .bubble.speech.tail-left::after { left:-1.5cqw; top:var(--tail,50%); margin-top:-1.5cqw; transform:rotate(135deg) skew(14deg,14deg); }
+  .bubble.speech.tail-none::after { display:none; }
+
+  .bubble.thought { background:rgba(255,255,255,.9); border:2px solid #26313d;
+    border-radius:48% 52% 55% 45% / 55% 48% 52% 45%; padding:3.6cqw 2.6cqw; }
+  .bubble.thought .dot { position:absolute; border-radius:50%; background:rgba(255,255,255,.9); border:2px solid #26313d; }
+  .bubble.thought.tail-down .dot.d1 { width:2.6cqw; height:2.6cqw; bottom:-4cqw; left:var(--tail,50%); margin-left:-3.4cqw; }
+  .bubble.thought.tail-down .dot.d2 { width:1.5cqw; height:1.5cqw; bottom:-7cqw; left:var(--tail,50%); margin-left:-2.4cqw; }
+  .bubble.thought.tail-up .dot.d1 { width:2.6cqw; height:2.6cqw; top:-4cqw; left:var(--tail,50%); margin-left:-3.4cqw; }
+  .bubble.thought.tail-up .dot.d2 { width:1.5cqw; height:1.5cqw; top:-7cqw; left:var(--tail,50%); margin-left:-2.4cqw; }
+
+  .bubble.sfx { font-weight:800; color:#20506e; text-shadow:0 0 6px #fff,0 0 6px #fff,0 0 3px #fff; }
+  .bubble.sfx.on-dark { color:#dceefb; text-shadow:0 0 6px #123,0 0 4px #123; }
+
+  /* ---- 差し込みコマ（inset） ---- */
+  .inset { position:absolute; z-index:5; border:4px solid #14181d; overflow:hidden; line-height:0; background:#fff; }
+  .inset img { width:100%; height:100%; display:block; object-fit:cover; }
+
+  .end { text-align:center; color:#7b8a99; font-size:13px; padding:30px 0 44px; }
+  footer { text-align:center; color:#a7b4c0; font-size:11px; padding:0 16px 26px; }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="series">ふゆげミューズ</h1>
+  <div class="sub" id="title"></div>
+</header>
+<main id="main"></main>
+<div class="end">― 第2話 おわり ―</div>
+<nav style="text-align:center;padding:0 0 10px;font-size:14px;"><a href="index.html">← 第1話「はえました」</a></nav>
+<footer>ふゆげミューズ第2話です。台詞と地の文はデータで持ち、ビューアが組みます。</footer>
+<script>
+fetch('ep02.json').then(r => r.json()).then(ep => {
+  document.getElementById('series').textContent = ep.series;
+  document.getElementById('title').textContent = ep.title;
+  const main = document.getElementById('main');
+
+  function addNarr(parent, n) {
+    if (n.style === 'burst') {
+      const bg = document.createElement('div');
+      bg.className = 'burst-bg';
+      bg.style.left = n.x + '%'; bg.style.top = n.y + '%';
+      bg.style.width = (n.burst || 62) + 'cqw'; bg.style.height = (n.burst || 62) + 'cqw';
+      parent.appendChild(bg);
+    }
+    const el = document.createElement('div');
+    el.className = 'narr ' + (n.style || 'plain');
+    el.style.left = n.x + '%'; el.style.top = n.y + '%';
+    el.style.fontSize = (n.size || 6) + 'cqw';
+    if (n.h) { el.style.height = n.h + 'cqw'; el.style.whiteSpace = 'normal'; }
+    if (n.color) el.style.color = n.color;
+    el.textContent = n.text;
+    parent.appendChild(el);
+  }
+
+  function addLine(parent, ln) {
+    const b = document.createElement('div');
+    b.className = 'bubble ' + (ln.kind || 'speech');
+    if (ln.kind === 'speech' || ln.kind === 'thought') {
+      b.classList.add('tail-' + (ln.tail_dir || 'down'));
+      if (ln.tail != null) b.style.setProperty('--tail', ln.tail + '%');
+      if (ln.w) b.style.width = ln.w + 'cqw';
+      if (ln.h) b.style.height = ln.h + 'cqw';
+    }
+    b.style.left = ln.x + '%'; b.style.top = ln.y + '%';
+    b.style.fontSize = (ln.size || 3.6) + 'cqw';
+    let tr = 'translate(-50%,-50%)';
+    if (ln.rotate) tr += ' rotate(' + ln.rotate + 'deg)';
+    b.style.transform = tr;
+    if (ln.kind === 'thought') {
+      const t = document.createElement('span'); t.textContent = ln.text; b.appendChild(t);
+      for (const c of ['dot d1','dot d2']) { const d = document.createElement('span'); d.className = c; b.appendChild(d); }
+    } else {
+      b.textContent = ln.text;
+    }
+    parent.appendChild(b);
+  }
+
+  function addPanel(parent, p) {
+    const fig = document.createElement('figure');
+    fig.className = 'blk' + (p.frame ? ' frame-' + p.frame : '');
+    fig.style.margin = 0;
+    const img = document.createElement('img');
+    img.className = 'bg'; img.src = p.img; img.alt = '';
+    if (p.display && p.display.h) {
+      fig.style.height = p.display.h + 'cqw';
+      img.style.objectPosition = p.display.pos || '50% 50%';
+    } else {
+      fig.classList.add('natural');
+    }
+    fig.appendChild(img);
+    if (p.fade_out) { const f = document.createElement('div'); f.className = 'fade bottom to-' + p.fade_out; fig.appendChild(f); }
+    if (p.fade_in) { const f = document.createElement('div'); f.className = 'fade top to-' + p.fade_in; fig.appendChild(f); }
+    for (const n of (p.narr || [])) addNarr(fig, n);
+    for (const ln of (p.lines || [])) addLine(fig, ln);
+    parent.appendChild(fig);
+    return fig;
+  }
+
+  for (const blk of ep.blocks) {
+    if (blk.type === 'space') {
+      const d = document.createElement('div');
+      d.className = 'blk';
+      d.style.height = blk.h + 'cqw';
+      d.style.background = blk.bg2 ? ('linear-gradient(to bottom,' + blk.bg + ',' + blk.bg2 + ')') : (blk.bg || '#fff');
+      for (const n of (blk.narr || [])) addNarr(d, n);
+      for (const ln of (blk.lines || [])) addLine(d, ln);
+      main.appendChild(d);
+    } else if (blk.type === 'panel') {
+      addPanel(main, blk);
+    } else if (blk.type === 'scene') {
+      const holder = document.createElement('div');
+      holder.style.position = 'relative';
+      const bgFig = addPanel(holder, blk.bg_panel);
+      bgFig.style.position = 'relative';
+      if (blk.inset) {
+        const ins = document.createElement('div');
+        ins.className = 'inset';
+        ins.style.left = blk.inset.x + '%'; ins.style.top = blk.inset.y + '%';
+        ins.style.width = blk.inset.w + '%'; ins.style.height = blk.inset.h + '%';
+        const im = document.createElement('img');
+        im.src = blk.inset.img; im.alt = '';
+        im.style.objectPosition = blk.inset.pos || '50% 50%';
+        ins.appendChild(im);
+        bgFig.appendChild(ins);
+      }
+      for (const ln of (blk.lines || [])) addLine(bgFig, ln);
+      main.appendChild(holder);
+    }
+  }
+});
+</script>
+</body>
+</html>
